@@ -5,12 +5,13 @@ import numpy
 import win32api
 import psutil
 
-addto = input("\x1b[39mPress \x1b[32m[Enter]\x1b[39m to use your monitors HZ or enter what to add on or takeaway | ")
+print("Software by \x1b[34mxula\x1b[34m!")
+addto = input("\x1b[39mPress \x1b[32m[Enter]\x1b[39m to use your monitors HZ or enter what to add on or takeaway : ")
 
 refreshrate = win32api.EnumDisplaySettings(None, 0).DisplayFrequency
 
 if addto == "":
-    fps = int(numpy.ceil(refreshrate) + 1) # Roblox loves to fluctuate from 143-144 rapidly etc.. so it does 1+ above refresh rate of monitor, meaning it should fluctuate between 144-145 etc..
+    fps = int(numpy.ceil(refreshrate) + 1)
 else:
     fps = int(numpy.ceil(refreshrate) + float(addto))
 
@@ -31,9 +32,10 @@ rbxpth = f"C:\\Users\\{username}\\Appdata\\Local\\Roblox\\Versions\\{rbxv.text}\
 print("Got roblox version at " + rbxv.text[8:] + ". Adding FFlag.")
 
 if os.path.exists(rbxpth):
-    print("ClientSettings Folder already found, Rewriting.")
-elif os.path.isfile("C:\\Users\\{username}\\Appdata\\Local\\Roblox\\Versions\\{rbxv.text}\\ClientSettings\ClientSettings.json"):
-    print("ClientSettings File already found, Rewriting.")
+    try:
+        print("ClientSettings Folder already found, Rewriting.")
+    except Exception as q:
+        print("An error occurred. See " + q)
 
 def killroblox():
     for proc in psutil.process_iter():
@@ -54,6 +56,6 @@ def writefile():
 if refreshrate >= 60:
     writefile()
 else:
-    print("FFlag not added as there is no point, Your refresh rate is {refreshrate}.")
+    print("FFlag not added. Refresh Rate detected as {refreshrate}. ")
 
-input("FFlag added. \x1b[39mPress \x1b[32m[Enter]\x1b[39m to exit.")
+input("FFlag added. \x1b[39mPress \x1b[32m[Enter]\x1b[39m to exit. ")
