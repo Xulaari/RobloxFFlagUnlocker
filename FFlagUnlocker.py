@@ -29,7 +29,7 @@ username = os.getlogin()
 try:
     robloxversion = requests.get("https://setup.rbxcdn.com/version")
 except Exception as k:
-    print("There was an error requesting roblox's version.")
+    print("There was an error requesting roblox's version, See: " + k)
 
 
 robloxpath = f"C:\\Users\\{username}\\Appdata\\Local\\Roblox\\Versions\\{robloxversion.text}\\ClientSettings"
@@ -37,7 +37,7 @@ bloxstrappath = f"C:\\Users\\{username}\\AppData\\Local\\Bloxstrap\\Modification
 
 print("Got roblox version at " + robloxversion.text[8:] + ". Adding FFlag.")
 
-if os.path.exists(robloxpath):
+if os.path.exists(robloxpath) and not os.path.exists(bloxstrappath):
     try:
         print("ClientSettings Folder already found, Rewriting.")
     except Exception as q:
@@ -61,8 +61,8 @@ def robloxwritefile():
       file_path = os.path.join(robloxpath, "ClientAppSettings.json")
       with open(file_path, "w") as f:
          json.dump(robloxsettings, f, indent=4)
-    except Exception as k:
-      print("An error occured. See:  " + k)
+    except Exception as v:
+      print("An error occured. See:  " + v)
 
 def bloxstrapwritefile():
     try:
